@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+        <title>Heros vs Ogres</title>
+    </head>
+    <body>
+        <main id="main-wrapper">
+            <div id="game-wrapper">
+                <h1>** Heros vs Ogres **</h1>
+                <canvas id="game-canvas" width="600" height="400"></canvas>
+                <div id="status-bar" class="hide">
+                    <button id="menu-popup-trigger" class="btn btn-menu">Menu</button> 
+                    <button id="restart-popup-trigger" class="btn btn-reset">⟳</button> 
+                    <ul class="stats">
+                        <!-- <li>
+                            <div class="character">
+                                <img src="img/hero.png">
+                            </div>
+                            <div class="point-count">10</div>
+                        </li> -->
+                        <li>
+                            <div class="character">
+                                <img src="img/ogre.png">
+                            </div>
+                            <div id="ogres-killed" class="point-count">0</div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="menu-popup" class="popup-wrapper popup hide">
+                    <div class="popup-container">
+                        <div class="popup-header"></div>
+                        <div class="popup-content">
+                            <div class="tabs">
+                                <ul class="tab-nav">
+                                    <li class="active">Controller</li>
+                                    <li>Difficulty</li>
+                                    <li>Audio</li>
+                                </ul>
+                                <ul class="tab-content">
+                                    <li id="settings-controller" class="">
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <div class="btn btn-ok">Save</div>
+                            <div class="btn btn-cancel">Cancel</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="finished-popup" class="popup-wrapper popup hide">
+                    <div class="popup-container">
+                        <div class="popup-header">
+                            <span>Congratulations!</span>
+                        </div>
+                        <div class="popup-content">
+                            <div class="introduction">
+                                <p>You did it! All 20 ogres were capture, you can take a break now. Here's how long it took:</p>
+                                <div id="time-elapsed"></div>
+                            </div>
+                            <div class="select-map">
+                                
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <div class="btn btn-ok">Restart</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="startup-popup" class="popup-wrapper popup hide">
+                    <div class="popup-container">
+                        <div class="popup-header">
+                            <span>Welcome!</span>
+                        </div>
+                        <div class="popup-content">
+                            <div class="introduction">
+                                <p>Your mission, should you choose to accept it is to kill as many ogres as possible, you're so badass you just need to touch an ogre to get it killed. Good Luck Jim!</p>
+                            </div>
+                            <div class="select-map">
+                                
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <div class="btn btn-ok">Start</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="restart-popup" class="popup-wrapper popup hide">
+                    <div class="popup-container">
+                        <div class="popup-header">
+                            <span>Restart?</span>
+                        </div>
+                        <div class="popup-content">
+                            <div class="introduction">
+                                <p>Are you sure you want to restart the game? All metrics and settings will be erased.</p>
+                            </div>
+                            <div class="select-map">
+                                
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <div class="btn btn-ok">Restart</div>
+                            <div class="btn btn-cancel">Cancel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav">
+                <ul>
+                    <li><a href="github.com/">Read me</a></li>
+                    <li><a href="github.com/">Github</a></li>
+                </ul>
+                <div class="powered-by">Powered by Netlify &copy; 2022</div>
+                <!-- <div class="release-date">&copy; 2022</div> -->
+            </div>
+        </main>
+
+        <script src="bundle.js"></script>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+#Logs
+logs
+*.log
+
+#Dependency Directories
+node_modules/
+
+#Excluded Folders
+src/other
