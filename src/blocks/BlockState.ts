@@ -2,7 +2,6 @@ import { Guid } from "../shared/Guid";
 import { IEntity } from "../shared/IEntity";
 import { Loop } from "../shared/Loop";
 
-// You need a state that can be comparable with 
 export class BlockState implements IEntity {
     private readonly _id: string;
     private readonly _name: string;
