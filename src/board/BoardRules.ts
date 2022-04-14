@@ -124,7 +124,7 @@ export class BoardRules {
     }
 
     static BlockMovedSuccess(board: Board, block: Block, action: BlockAction, args: BlockMovedArgs) {
-        if (Check.IsNull(args))
+        if (Check.isNull(args))
             return;
         block.move(args.target);
         for (let ogre of args.ogresToKill) {

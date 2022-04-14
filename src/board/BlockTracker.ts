@@ -16,13 +16,13 @@ export class BlockTracker {
 
     // TODO: Further Optimize it
     add(event: BlockMoved) {
-        if (Check.IsNull(event))
+        if (Check.isNull(event))
             return;
         // if (event.block.state == BlockState.Dead)
         //     return;
-        if (!Check.IsNull(event.from))
+        if (!Check.isNull(event.from))
             this.deleteEntries(event.block, event.from.points);
-        if (!Check.IsNull(event.to))
+        if (!Check.isNull(event.to))
             this.addEntries(event.block, event.to.points);
     }
 
@@ -41,7 +41,7 @@ export class BlockTracker {
         for (let point of polygon.points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (Check.IsNull(entry))
+            if (Check.isNull(entry))
                 continue;
             for (let neighbor of entry.values()) {
                 if (block == neighbor)
@@ -87,7 +87,7 @@ export class BlockTracker {
         for (let point of points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (Check.IsNull(entry))
+            if (Check.isNull(entry))
                 this.entries.set(entryId, new Map<string, Block>());
             this.entries.get(entryId).set(block.id, block);
         }
@@ -97,7 +97,7 @@ export class BlockTracker {
         for (let point of points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (!Check.IsNull(entry))
+            if (!Check.isNull(entry))
                 this.entries.get(entryId).delete(block.id);
         }
     }

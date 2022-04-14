@@ -11,7 +11,7 @@ export class FlowControl {
     }
 
     add(entry: FlowControlEntry) {
-        if (Check.IsNull(entry))
+        if (Check.isNull(entry))
             return;
         this.entries.set(entry.id, entry);
     }

@@ -53,13 +53,13 @@ export class Game {
 
     gameCompleted() {
         this.pause();
-        if (!Check.IsNull(this.onGameCompleted))
+        if (!Check.isNull(this.onGameCompleted))
             this.onGameCompleted();
         this.status = GameStatus.Completed;
     }
 
     statsChanged() {
-        if (!Check.IsNull(this.onStatsChanged))
+        if (!Check.isNull(this.onStatsChanged))
             this.onStatsChanged();
     }
 

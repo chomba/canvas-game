@@ -33,22 +33,22 @@ export class Popup {
     }
 
     ok() {
-        if (!Check.IsNull(this.OnOKClicked))
+        if (!Check.isNull(this.OnOKClicked))
             this.OnOKClicked();
         this.hide();
     }
 
     cancel() {
         this.hide();
-        if (!Check.IsNull(this.OnCancelClicked))
+        if (!Check.isNull(this.OnCancelClicked))
             this.OnCancelClicked();
     }
 
     open() {
-        if (!Check.IsNull(this.BeforeOpening)) 
+        if (!Check.isNull(this.BeforeOpening)) 
             this.BeforeOpening();
         this.unhide();
-        if (!Check.IsNull(this.OnOpened))
+        if (!Check.isNull(this.OnOpened))
             this.OnOpened();
     }
 }

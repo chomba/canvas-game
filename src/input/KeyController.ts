@@ -5,7 +5,6 @@ import { TwoKeyBinding } from "./TwoKeyBinding";
 import { KeyBinding } from "./KeyBinding";
 import { InputController } from "./InputController";
 
-//KeyTracker
 export class KeyController extends InputController {
     constructor(board: Board) {
         super(board);
@@ -18,7 +17,7 @@ export class KeyController extends InputController {
     }
 
     attach() {
-        this.detach();
+        window.clearInterval(this.timer);
         this.timer = window.setInterval(() => this.runKeys(), 20);
     }
 

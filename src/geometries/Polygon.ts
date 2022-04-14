@@ -4,7 +4,7 @@ import { Vector } from "./Vector";
 
 // http://web.archive.org/web/20141127210836/http://content.gpwiki.org/index.php/Polygon_Collision
 
-export class Polygon implements Iterable<Point> {
+export class Polygon {
     private readonly _origin: Point;
     private readonly _points: Point[];
     private readonly _width: number;
@@ -127,16 +127,4 @@ export class Polygon implements Iterable<Point> {
         }
         return values;
     }
-
-    public [Symbol.iterator]() {
-        return {
-            next: function() {
-                return {
-                    done: this.index == this.points.length - 1,
-                    value: this.points[this.index]
-                }
-            }.bind(this)
-        };
-    }
-
 }

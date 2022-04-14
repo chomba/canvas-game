@@ -39,24 +39,24 @@ export class Board implements IEntity {
     do(block: Block, action: BlockAction): boolean {
         let entry = this.control.get(block.state, action);
         // No entry in State Machine (Block)
-        if (Check.IsNull(entry))
+        if (Check.isNull(entry))
             return false;
         // There's an entry but no condition (Allow)
-        if (Check.IsNull(entry.When)) {
+        if (Check.isNull(entry.When)) {
             block.state = entry.finalState;
-            if (!Check.IsNull(entry.OnSuccess))
+            if (!Check.isNull(entry.OnSuccess))
                 entry.OnSuccess(this, block, action, null);
             return true;
         }
         // There's an entry and there's a condition (Allow if condition is met)
         let result: FlowConditionResult = entry.When(this, block, action);
         if (!result.success) {
-            if (!Check.IsNull(entry.OnFailure))
+            if (!Check.isNull(entry.OnFailure))
                 entry.OnFailure(this, block, action, result.onFailureArgs);
             return false;
         }
         block.state = entry.finalState;
-        if (!Check.IsNull(entry.OnSuccess))
+        if (!Check.isNull(entry.OnSuccess))
             entry.OnSuccess(this, block, action, result.onSuccessArgs);
         return true;
     }
@@ -66,7 +66,7 @@ export class Board implements IEntity {
     }
 
     add(block: Block, at: Point = null) {
-        if (Check.IsNull(at)) {
+        if (Check.isNull(at)) {
             let point = Point.random(this.width, this.height);
             while (!this.isObstacleFree(block, point))
                 point = Point.random(this.width, this.height);
@@ -80,7 +80,7 @@ export class Board implements IEntity {
         switch (block.type) {
             case BlockType.Player:
                 this.players.set(block.id, block);
-                if (!Check.IsNull(this.onPlayerAdded))
+                if (!Check.isNull(this.onPlayerAdded))
                     this.onPlayerAdded(block);
                 break;   
             case BlockType.Obstacle:
@@ -92,7 +92,7 @@ export class Board implements IEntity {
     remove(block: Block) {
         if (block.type == BlockType.Player) {
             this.players.delete(block.id);
-            if (!Check.IsNull(this.onPlayerRemoved))
+            if (!Check.isNull(this.onPlayerRemoved))
                 this.onPlayerRemoved(block);
         }
         if (block.type == BlockType.Obstacle)
@@ -122,7 +122,7 @@ export class Board implements IEntity {
     }
 
     renderOn(ctx: CanvasRenderingContext2D): number {
-        if (Check.IsNull(ctx))
+        if (Check.isNull(ctx))
             return;
          
         this.ground.renderOn(ctx);

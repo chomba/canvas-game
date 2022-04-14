@@ -58,7 +58,7 @@ export abstract class InputController {
     }
 
     add(binding: KeyBinding) {
-        if (Check.IsNull(binding) || this.exists(binding))
+        if (Check.isNull(binding) || this.exists(binding))
             return;
         switch (binding.keyCount) {
             case 1: 

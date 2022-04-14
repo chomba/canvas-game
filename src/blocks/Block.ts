@@ -55,13 +55,13 @@ export abstract class Block implements IEntity {
 
     get animation(): BlockAnimation {
         let animation = this.animations.get(this.state.name);
-        if (Check.IsNull(animation))
+        if (Check.isNull(animation))
             return null;
         return animation;
     }
 
     set state(newState: BlockState) {
-        if (Check.IsNull(newState) || Check.IsNull(this.state) || newState.equals(this.state))
+        if (Check.isNull(newState) || Check.isNull(this.state) || newState.equals(this.state))
             return;
         this._state = newState;  
         // this.OnStateChanged()
@@ -72,13 +72,9 @@ export abstract class Block implements IEntity {
     }
 
     move(to: Point) {
-        // if (to.equals(this.at)) 
-        //     return;
-        // if (this.state == BlockState.Dead)
-        //     return;
         let from = this._polygon;
         this._polygon = this._polygon.translateTo(to);
-        if (!Check.IsNull(this.OnMoved))
+        if (!Check.isNull(this.OnMoved))
             this.OnMoved(new BlockMoved(this, from, this._polygon));
     }
 
