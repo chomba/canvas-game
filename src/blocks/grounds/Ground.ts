@@ -1,16 +1,16 @@
 import { Polygon } from "../../geometries/Polygon";
+import { AnimationRegistry } from "../AnimationRegistry";
 import { Block } from "../Block";
-import { BlockAnimation } from "../BlockAnimation";
 import { BlockState } from "../BlockState";
 import { BlockType } from "../BlockType";
 
 export abstract class Ground extends Block {
-    constructor(width: number, height: number, animations: Map<string, BlockAnimation>) {
-        super(Polygon.rectangle(width, height), BlockType.Ground, BlockState.Idle, animations);
+    constructor(width: number, height: number) {
+        super(Polygon.rectangle(width, height), BlockType.Ground, BlockState.Idle);
     }
 
     renderOn(ctx: CanvasRenderingContext2D): void {
-        this._image.src = this.animation?.image; 
+        this._image.src = AnimationRegistry.get(this.constructor.name, BlockState.Idle)?.image ?? "404-image"; 
         let dx = this.polygon.width / this._image.width;
         let dy = this.polygon.height / this._image.height;
         if (!isFinite(dx) || !isFinite(dy))

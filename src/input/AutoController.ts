@@ -1,7 +1,6 @@
 import { Block } from "../blocks/Block";
 import { BlockAction } from "../blocks/BlockAction";
 import { Board } from "../board/Board";
-import { Check } from "../shared/Check";
 import { Random } from "../shared/Random";
 import { InputController } from "./InputController";
 import { OneKeyBinding } from "./OneKeyBinding";

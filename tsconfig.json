@@ -1,18 +1,22 @@
 {
-    "compilerOptions": {
-      "target": "ES5",
-      "module": "ES6",
-      "jsx": "react",
-      "lib": ["ES2016", "DOM"],
-      "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "outDir": "./dist/",
-      "sourceMap": true,
+  "compilerOptions": {
+      "lib": ["ES2023", "ES2023.Array", "DOM"],
+      "module": "ES2022",
+      "target": "ES2022",
+      "useDefineForClassFields": true,
+      "skipLibCheck": true,
       "allowJs": true,
-      "moduleResolution": "node",
-      "downlevelIteration": true
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "src/other/**/*", "**/*.spec.ts"]
-  }
+      /* Bundler mode */
+      "moduleResolution": "bundler",
+      "allowImportingTsExtensions": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      /* Linting */
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}

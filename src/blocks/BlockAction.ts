@@ -4,7 +4,7 @@ import { IEntity } from "../shared/IEntity";
 export class BlockAction implements IEntity {
     private readonly _id: string;
     private readonly _runMany: boolean;
-    private readonly _name: string;
+    // private readonly _name: string;
     // private readonly repeat: boolean; 
     // private readonly retrigger: boolean;
     // private readonly _stopOnRelease: boolean;

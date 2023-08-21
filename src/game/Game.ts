@@ -1,15 +1,12 @@
 import { Block } from "../blocks/Block";
 import { BlockAction } from "../blocks/BlockAction";
-import { BlockState } from "../blocks/BlockState";
 import { Hero } from "../blocks/players/Hero";
 import { Ogre } from "../blocks/players/Ogre";
 import { Board } from "../board/Board";
 import { BoardBuilder } from "../board/BoardBuilder";
-import { Point } from "../geometries/Point";
 import { AutoController } from "../input/AutoController";
 import { KeyController } from "../input/KeyController";
 import { OneKeyBinding } from "../input/OneKeyBinding";
-import { Check } from "../shared/Check";
 import { GameSettings } from "./GameSettings";
 import { GameStats } from "./GameStats";
 import { GameStatus } from "./GameStatus";
@@ -53,13 +50,14 @@ export class Game {
 
     gameCompleted() {
         this.pause();
-        if (!Check.isNull(this.onGameCompleted))
+        if (this.onGameCompleted) {
             this.onGameCompleted();
+        }
         this.status = GameStatus.Completed;
     }
 
     statsChanged() {
-        if (!Check.isNull(this.onStatsChanged))
+        if (this.onStatsChanged)
             this.onStatsChanged();
     }
 

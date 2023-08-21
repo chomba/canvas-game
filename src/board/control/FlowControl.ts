@@ -1,6 +1,5 @@
 import { BlockAction } from "../../blocks/BlockAction";
 import { BlockState } from "../../blocks/BlockState";
-import { Check } from "../../shared/Check";
 import { FlowControlEntry } from "./FlowControlEntry";
 
 export class FlowControl {
@@ -11,7 +10,7 @@ export class FlowControl {
     }
 
     add(entry: FlowControlEntry) {
-        if (Check.isNull(entry))
+        if (!entry)
             return;
         this.entries.set(entry.id, entry);
     }

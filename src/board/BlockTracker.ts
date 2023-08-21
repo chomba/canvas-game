@@ -1,7 +1,6 @@
 import { Block } from "../blocks/Block";
 import { BlockType } from "../blocks/BlockType";
 import { BlockMoved } from "../blocks/events/BlockMoved";
-import { Check } from "../shared/Check";
 import { Point } from "../geometries/Point";
 import { Polygon } from "../geometries/Polygon";
 import { Ogre } from "../blocks/players/Ogre";
@@ -16,13 +15,13 @@ export class BlockTracker {
 
     // TODO: Further Optimize it
     add(event: BlockMoved) {
-        if (Check.isNull(event))
+        if (!event)
             return;
         // if (event.block.state == BlockState.Dead)
         //     return;
-        if (!Check.isNull(event.from))
+        if (event.from)
             this.deleteEntries(event.block, event.from.points);
-        if (!Check.isNull(event.to))
+        if (event.to)
             this.addEntries(event.block, event.to.points);
     }
 
@@ -41,7 +40,7 @@ export class BlockTracker {
         for (let point of polygon.points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (Check.isNull(entry))
+            if (!entry)
                 continue;
             for (let neighbor of entry.values()) {
                 if (block == neighbor)
@@ -87,7 +86,7 @@ export class BlockTracker {
         for (let point of points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (Check.isNull(entry))
+            if (!entry)
                 this.entries.set(entryId, new Map<string, Block>());
             this.entries.get(entryId).set(block.id, block);
         }
@@ -97,7 +96,7 @@ export class BlockTracker {
         for (let point of points) {
             let entryId = this.id(point);
             let entry = this.entries.get(entryId);
-            if (!Check.isNull(entry))
+            if (entry)
                 this.entries.get(entryId).delete(block.id);
         }
     }

@@ -1,8 +1,8 @@
 import { Loop } from "../shared/Loop";
 
 export class BlockAnimation {
-    private timer: number;
-    private autoRepeat: boolean;
+    // private timer: number;
+    // private autoRepeat: boolean;
     // Each blockState has an animation associated with it
     // Such animation is automatically stopped and reset when switching to another state
     private imageLoop: Loop<string>;

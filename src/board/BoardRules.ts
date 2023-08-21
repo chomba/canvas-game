@@ -1,12 +1,10 @@
 import { Block } from "../blocks/Block";
 import { BlockAction } from "../blocks/BlockAction";
 import { BlockState } from "../blocks/BlockState";
-import { BlockType } from "../blocks/BlockType";
 import { Hero } from "../blocks/players/Hero";
 import { Ogre } from "../blocks/players/Ogre";
 import { Point } from "../geometries/Point";
 import { Polygon } from "../geometries/Polygon";
-import { Check } from "../shared/Check";
 import { Board } from "./Board";
 import { BlockMovedArgs, FlowConditionResult } from "./control/FlowConditionResult";
 import { FlowControl } from "./control/FlowControl";
@@ -124,7 +122,7 @@ export class BoardRules {
     }
 
     static BlockMovedSuccess(board: Board, block: Block, action: BlockAction, args: BlockMovedArgs) {
-        if (Check.isNull(args))
+        if (!args)
             return;
         block.move(args.target);
         for (let ogre of args.ogresToKill) {

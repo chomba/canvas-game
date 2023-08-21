@@ -1,11 +1,9 @@
 import { IEntity } from "../shared/IEntity";
 import { Guid } from "../shared/Guid";
-import { Check } from "../shared/Check";
 import { Block } from "../blocks/Block";
 import { BlockType } from "../blocks/BlockType";
 import { BlockMoved } from "../blocks/events/BlockMoved";
 import { BlockAction } from "../blocks/BlockAction";
-import { BlockState } from "../blocks/BlockState";
 import { BlockTracker } from "./BlockTracker";
 import { FlowControl } from "./control/FlowControl";
 import { Point } from "../geometries/Point";
@@ -39,24 +37,24 @@ export class Board implements IEntity {
     do(block: Block, action: BlockAction): boolean {
         let entry = this.control.get(block.state, action);
         // No entry in State Machine (Block)
-        if (Check.isNull(entry))
+        if (!entry)
             return false;
         // There's an entry but no condition (Allow)
-        if (Check.isNull(entry.When)) {
+        if (!entry.When) {
             block.state = entry.finalState;
-            if (!Check.isNull(entry.OnSuccess))
+            if (entry.OnSuccess)
                 entry.OnSuccess(this, block, action, null);
             return true;
         }
         // There's an entry and there's a condition (Allow if condition is met)
         let result: FlowConditionResult = entry.When(this, block, action);
         if (!result.success) {
-            if (!Check.isNull(entry.OnFailure))
+            if (entry.OnFailure)
                 entry.OnFailure(this, block, action, result.onFailureArgs);
             return false;
         }
         block.state = entry.finalState;
-        if (!Check.isNull(entry.OnSuccess))
+        if (entry.OnSuccess)
             entry.OnSuccess(this, block, action, result.onSuccessArgs);
         return true;
     }
@@ -66,7 +64,7 @@ export class Board implements IEntity {
     }
 
     add(block: Block, at: Point = null) {
-        if (Check.isNull(at)) {
+        if (!at) {
             let point = Point.random(this.width, this.height);
             while (!this.isObstacleFree(block, point))
                 point = Point.random(this.width, this.height);
@@ -80,7 +78,7 @@ export class Board implements IEntity {
         switch (block.type) {
             case BlockType.Player:
                 this.players.set(block.id, block);
-                if (!Check.isNull(this.onPlayerAdded))
+                if (this.onPlayerAdded)
                     this.onPlayerAdded(block);
                 break;   
             case BlockType.Obstacle:
@@ -92,7 +90,7 @@ export class Board implements IEntity {
     remove(block: Block) {
         if (block.type == BlockType.Player) {
             this.players.delete(block.id);
-            if (!Check.isNull(this.onPlayerRemoved))
+            if (this.onPlayerRemoved)
                 this.onPlayerRemoved(block);
         }
         if (block.type == BlockType.Obstacle)
@@ -122,7 +120,7 @@ export class Board implements IEntity {
     }
 
     renderOn(ctx: CanvasRenderingContext2D): number {
-        if (Check.isNull(ctx))
+        if (!ctx)
             return;
          
         this.ground.renderOn(ctx);

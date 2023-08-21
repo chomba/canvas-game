@@ -1,12 +1,11 @@
 import { IEntity } from "../shared/IEntity";
 import { Guid } from "../shared/Guid";
 import { BlockType } from "./BlockType";
-import { Check } from "../shared/Check";
 import { BlockMoved } from "./events/BlockMoved";
 import { BlockState} from "./BlockState";
-import { BlockAnimation } from "./BlockAnimation";
 import { Polygon } from "../geometries/Polygon";
 import { Point } from "../geometries/Point";
+import { AnimationRegistry } from "./AnimationRegistry";
 
 export abstract class Block implements IEntity {
     private readonly _id: string;
@@ -15,17 +14,15 @@ export abstract class Block implements IEntity {
     private _state: BlockState;
     protected _image: HTMLImageElement;
     public static MaxWidth: number = 50;
-    public static MaxHeight: number = 50;
-    protected animations: Map<string, BlockAnimation>; // Map<stateId, BlockAnimation>
-    public OnMoved: (args: BlockMoved) => void;
+    public static MaxHeight: number = 50;   
+    public OnMoved: ((args: BlockMoved) => void) | undefined = undefined;
     
-    constructor(polygon: Polygon, type: BlockType, state: BlockState, animations: Map<string, BlockAnimation>) {
+    constructor(polygon: Polygon, type: BlockType, state: BlockState) {
         // Path Width and Height must be lower than Max values
         this._id = Guid.new();
         this._type = type;
         this._polygon = polygon;
         this._state = state;
-        this.animations = animations;
         this._image = new Image();
     }
 
@@ -53,15 +50,8 @@ export abstract class Block implements IEntity {
         return this._image;
     }
 
-    get animation(): BlockAnimation {
-        let animation = this.animations.get(this.state.name);
-        if (Check.isNull(animation))
-            return null;
-        return animation;
-    }
-
     set state(newState: BlockState) {
-        if (Check.isNull(newState) || Check.isNull(this.state) || newState.equals(this.state))
+        if (!newState || !this.state || newState.equals(this.state))
             return;
         this._state = newState;  
         // this.OnStateChanged()
@@ -74,12 +64,13 @@ export abstract class Block implements IEntity {
     move(to: Point) {
         let from = this._polygon;
         this._polygon = this._polygon.translateTo(to);
-        if (!Check.isNull(this.OnMoved))
+        if (this.OnMoved) {
             this.OnMoved(new BlockMoved(this, from, this._polygon));
+        }   
     }
 
     renderOn(ctx: CanvasRenderingContext2D): void {
-        this._image.src = this.animation?.image; 
+        this._image.src = AnimationRegistry.get(this.constructor.name, this.state)?.image ?? "404-image.png"; 
         ctx.drawImage(this.image, this.at.x, this.at.y, this.polygon.width, this.polygon.height);
     }    
 }

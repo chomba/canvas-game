@@ -1,5 +1,3 @@
-import { Block } from "./Block";
-
 export class BlockType {
     private _name: string;
 

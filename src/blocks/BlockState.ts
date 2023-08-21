@@ -1,6 +1,5 @@
 import { Guid } from "../shared/Guid";
 import { IEntity } from "../shared/IEntity";
-import { Loop } from "../shared/Loop";
 
 export class BlockState implements IEntity {
     private readonly _id: string;

@@ -1,4 +1,3 @@
-import { Check } from "../shared/Check";
 import { Board } from "../board/Board";
 import { OneKeyBinding } from "./OneKeyBinding";
 import { TwoKeyBinding } from "./TwoKeyBinding";
@@ -58,7 +57,7 @@ export abstract class InputController {
     }
 
     add(binding: KeyBinding) {
-        if (Check.isNull(binding) || this.exists(binding))
+        if (!binding || this.exists(binding))
             return;
         switch (binding.keyCount) {
             case 1: 

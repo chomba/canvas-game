@@ -1,8 +1,4 @@
-import { Check } from "../shared/Check";
 import { Board } from "../board/Board";
-import { OneKeyBinding } from "./OneKeyBinding";
-import { TwoKeyBinding } from "./TwoKeyBinding";
-import { KeyBinding } from "./KeyBinding";
 import { InputController } from "./InputController";
 
 export class KeyController extends InputController {
